@@ -1,0 +1,37 @@
+.question-button-right {
+  min-width: 150px;
+  min-height: 44px;
+  border-radius: 20px;
+  border: none;
+  background-color: #846960;
+  color: white;
+  margin-bottom: 5px;
+}
+
+.question-button-wrong {
+  min-width: 150px;
+  min-height: 44px;
+  border-radius: 20px;
+  border: none;
+  background-color: #846960;
+  color: white;
+  margin-bottom: 5px;
+}
+
+.question-button-wrong:focus {
+  background-color: red;
+}
+
+.question-button-right:focus {
+  background-color: green;
+}
+
+.questions-list {
+  list-style-type: none;
+  width: 80%;
+}
+
+.answers-wrapper {
+  display: flex;
+  flex-direction: column;
+}

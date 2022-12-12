@@ -1,0 +1,17 @@
+.region-dropdown {
+  width: 150px;
+  height: 35px;
+  border-radius: 6px;
+  border: none;
+}
+
+.chosen-region {
+  display: flex;
+  width: 150px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  border: 1px white solid;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
