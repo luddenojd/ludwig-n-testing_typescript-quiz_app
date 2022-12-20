@@ -4,3 +4,11 @@
   border-radius: 6px;
   border: none;
 }
+
+.difficulty-chosen {
+  border: 1px white solid;
+  border-radius: 6px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 56px;
+}

@@ -14,7 +14,7 @@ const Settings = ({ switchComponent }: { switchComponent: Function }) => {
           Tillbaka
         </p>
       </div>
-      <div>
+      <div className="settings-wrapper">
         <Region />
         <Difficulty />
       </div>

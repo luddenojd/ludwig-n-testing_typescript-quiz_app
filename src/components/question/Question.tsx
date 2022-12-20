@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useContext } from "react"
 import QuestionCard from "../questioncard/QuestionCard"
+import Countdown from "../countdown/Countdown"
 import Context from "../../context/Context"
+import { easy, medium, hard } from "../../config/Config"
 
 const Question = ({ switchComponent }: { switchComponent: Function }) => {
   const {
@@ -9,23 +11,25 @@ const Question = ({ switchComponent }: { switchComponent: Function }) => {
     difficultySettings,
     setQuestions,
     region,
+    counter,
+    difficulty,
+    setDifficulty,
   } = useContext(Context)
   const [newCategory, setNewCategory] = useState("")
-  const [difficulty, setDifficulty] = useState("")
 
   useEffect(() => {
     switch (difficultySettings) {
       case "Easy":
         setDifficulty("easy")
-        setDifficultyScore(1)
+        setDifficultyScore(easy)
         break
       case "Medium":
         setDifficulty("medium")
-        setDifficultyScore(3)
+        setDifficultyScore(medium)
         break
       case "Hard":
         setDifficulty("hard")
-        setDifficultyScore(5)
+        setDifficultyScore(hard)
         break
       default:
     }
@@ -66,9 +70,17 @@ const Question = ({ switchComponent }: { switchComponent: Function }) => {
       fetch(
         `https://the-trivia-api.com/api/questions?categories=${newCategory}&limit=1&region=${region}&difficulty=${difficulty}`
       )
-        .then((response) => response.json())
+        .then((response) => {
+          if (response.ok) {
+            return response.json()
+          } else throw new Error("Trivia is currently not working")
+        })
         .then((result) => {
           setQuestions(result)
+          console.log(result)
+        })
+        .catch((error) => {
+          console.log(error)
         })
     }
   }, [
@@ -80,10 +92,13 @@ const Question = ({ switchComponent }: { switchComponent: Function }) => {
     setDifficultyScore,
     region,
   ])
-
   return (
     <div>
-      <QuestionCard switchComponent={switchComponent} />
+      {counter !== "Switch" ? (
+        <Countdown />
+      ) : (
+        <QuestionCard switchComponent={switchComponent} />
+      )}
     </div>
   )
 }

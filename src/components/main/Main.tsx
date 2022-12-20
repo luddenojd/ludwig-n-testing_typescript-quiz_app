@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import Category from "../category/Category"
+import { timePerRound } from "../../config/Config"
 import "./Main.css"
 import Context from "../../context/Context"
 import Question from "../question/Question"
@@ -13,9 +14,14 @@ const Main = () => {
   const [answer, setAnswer] = useState("")
   const [categories, setCategories] = useState<string[]>([])
   const [category, setCategory] = useState("")
+  const combo = "Combo"
   const [component, setComponent] = useState("category")
-  const [consecutiveScore, setConsecutiveScore] = useState(0)
+  const [consecutiveCount, setConsecutiveCount] = useState<string[]>([])
+  const [consecutiveScore, setConsecutiveScore] = useState(1)
   const [correctScore, setCorrectScore] = useState(0)
+  const [counter, setCounter] = useState("")
+  const [counter30, setCounter30] = useState(timePerRound)
+  const [difficulty, setDifficulty] = useState("")
   const [difficultyScore, setDifficultyScore] = useState(0)
   const [difficultySettings, setDifficultySettings] = useState("Easy")
   const [input, setInput] = useState("")
@@ -23,9 +29,9 @@ const Main = () => {
   const [pointsPerRound, setPointsPerRound] = useState<number[]>([])
   const [questions, setQuestions] = useState<string[]>([])
   const [region, setRegion] = useState("GB")
+  const [stopTime, setStopTime] = useState<number[]>([])
   const [timeLeft, setTimeLeft] = useState(0)
   const [totalScore, setTotalScore] = useState(0)
-  const [width, setWidth] = useState(0)
 
   function switchComponent(component: string) {
     setComponent(component)
@@ -55,7 +61,6 @@ const Main = () => {
           <div className="player-info">
             <img src={playerLogo} width={20} alt="" />
             <h4>{player}</h4>
-            <h4>{totalScore}p</h4>
             <img
               onClick={() => setComponent("settings")}
               src={settingsLogo}
@@ -85,12 +90,24 @@ const Main = () => {
               categories,
               questions,
               setQuestions,
-              width,
-              setWidth,
               totalScore,
               region,
               setRegion,
               component,
+              counter,
+              setCounter,
+              timeLeft,
+              setTimeLeft,
+              counter30,
+              setCounter30,
+              stopTime,
+              setStopTime,
+              difficulty,
+              setDifficulty,
+              combo,
+              consecutiveCount,
+              setConsecutiveCount,
+              consecutiveScore,
             }}
           >
             {component === "category" && (

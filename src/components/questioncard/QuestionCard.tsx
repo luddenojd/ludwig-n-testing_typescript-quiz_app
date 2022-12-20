@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react"
 import Context from "../../context/Context"
-import Progressbar from "../progressbar/Progressbar"
+import Countdown30 from "../countdown/Countdown30"
+import { questionsPerRound } from "../../config/Config"
 import "./QuestionCard.css"
 const QuestionCard = ({ switchComponent }: { switchComponent: Function }) => {
   const {
@@ -13,40 +14,73 @@ const QuestionCard = ({ switchComponent }: { switchComponent: Function }) => {
     setPointsPerRound,
     questions,
     setQuestions,
-    setWidth,
-    component,
+    setCounter,
+    stopTime,
+    setStopTime,
+    counter30,
+    setTimeLeft,
+    difficultyScore,
+    setTotalScore,
+    combo,
+    consecutiveCount,
+    setConsecutiveCount,
+    setConsecutiveScore,
+    consecutiveScore,
+    answer,
   } = useContext(Context)
 
   function setPointsAndAnswer(answer: any) {
     setAnswer(answer)
+    setTimeLeft(counter30)
     setAllAnswers([...allAnswers, answer])
     setPointsPerRound([...pointsPerRound, correctScore])
+    setStopTime([...stopTime, counter30])
     if (answer === "correctAnswer") {
       setCorrectScore(1)
+      setConsecutiveCount([...consecutiveCount, combo])
+      if (consecutiveCount.length >= 3) {
+        setConsecutiveScore(consecutiveCount.length + 1)
+      }
     } else {
       setCorrectScore(0)
+      setConsecutiveCount([])
     }
-    if (allAnswers.length < 9) {
+    if (allAnswers.length < questionsPerRound) {
       setTimeout(() => {
         switchComponent("category")
         setQuestions([])
-        setWidth(0)
+        setCounter("")
       }, 500)
     } else {
       switchComponent("winner")
+      let timeSum = 0
+      let roundSum = 0
+      stopTime.forEach((item: number) => {
+        timeSum += item
+      })
+      pointsPerRound.forEach((item: number) => {
+        roundSum += item
+      })
+      if (roundSum > 0) {
+        setTotalScore(timeSum * difficultyScore + roundSum * consecutiveScore)
+      } else {
+        setTotalScore(0)
+      }
     }
-    console.log(pointsPerRound)
   }
+
   useEffect(() => {
-    setTimeout(() => {
+    if (counter30 < 1) {
       switchComponent("category")
-    }, 30000)
-  }, [component])
+    }
+  }, [counter30])
+  console.log(pointsPerRound)
+  console.log(answer)
   return (
-    <div>
+    <div className="question-card-wrapper">
       <ul className="questions-list">
         {questions?.map((item: any) => (
-          <li key={item.id}>
+          <li className="question-list-li" key={item.id}>
             <p>{item.question}</p>
 
             <div className="answers-wrapper">
@@ -66,7 +100,7 @@ const QuestionCard = ({ switchComponent }: { switchComponent: Function }) => {
                 {item.correctAnswer}
               </button>
             </div>
-            <Progressbar />
+            <Countdown30 />
           </li>
         ))}
       </ul>

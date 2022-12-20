@@ -1,3 +1,18 @@
 .settings-back-button {
   text-decoration: underline;
 }
+
+.settings-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 768px) {
+  .settings-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: top;
+    width: 600px;
+    justify-content: space-evenly;
+  }
+}
