@@ -1,5 +1,4 @@
-import React from "react"
-import "./Category.css"
+import React, { useState } from "react"
 const Category = () => {
   const categories = [
     "Arts & Literature",
@@ -13,6 +12,8 @@ const Category = () => {
     "Society & Culture",
     "Sport & Leisure",
   ]
+  const [category, setCategory] = useState("")
+  const [counter30, setCounter30] = useState(0)
   const shuffledCategories = categories.sort(
     (a: any, b: any) => 0.5 - Math.random()
   )
@@ -24,10 +25,6 @@ const Category = () => {
   const nextQuestion = (item: string) => {
     setCategory(item)
     setCounter30(30)
-
-    if (difficultySettings === "Random") {
-      setDifficulty(randomDifficulties[0])
-    }
   }
 
   return (

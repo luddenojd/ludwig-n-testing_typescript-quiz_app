@@ -1,6 +1,6 @@
 import React, { useState } from "react"
-import swedishFlag from "../../img/icons8-sweden-48.png"
-import britishFlag from "../../img/icons8-great-britain-48.png"
+import swedishFlag from "../../../img/icons8-sweden-48.png"
+import britishFlag from "../../../img/icons8-great-britain-48.png"
 
 const Region = () => {
   const [region, setRegion] = useState("GB")

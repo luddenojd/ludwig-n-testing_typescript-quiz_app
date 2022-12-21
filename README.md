@@ -8,6 +8,14 @@ Diagrams are located in the 'diagram'-folder inside of the 'src'-folder.
 
 I have tried to use the design principles 'YAGNI', 'KISS' and 'DRY'. This is something i personally think is very important to allways keep in mind. I strive to write my code short yet effective in all of my projects. Saving old code or keep it while outcommented gives me headaches.
 
+## Tests
+
+Unit tests on mocked components. BDD tests.
+
+## Test strategy
+
+React-testing-library. Jest-cucmber.
+
 ## Available Scripts
 
 In the project directory, you can run:
